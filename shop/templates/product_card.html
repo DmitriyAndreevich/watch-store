@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+{% load staticfiles%}
+{% block head %}
+
+<script type="text/javascript">
+	$(function() {
+	
+	    var menu_ul = $('.menu_drop > li > ul'),
+	           menu_a  = $('.menu_drop > li > a');
+	    
+	    menu_ul.hide();
+	
+	    menu_a.click(function(e) {
+	        e.preventDefault();
+	        if(!$(this).hasClass('active')) {
+	            menu_a.removeClass('active');
+	            menu_ul.filter(':visible').slideUp('normal');
+	            $(this).addClass('active').next().stop(true,true).slideDown('normal');
+	        } else {
+	            $(this).removeClass('active');
+	            $(this).next().stop(true,true).slideUp('normal');
+	        }
+	    });
+	
+	});
+</script>		
+
+<script src="{% static 'js/imagezoom.js' %}"></script>
+<script defer src="{% static 'js/jquery.flexslider.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/flexslider.css' %}" type="text/css" media="screen" />
+
+<script>
+// Can also be used with $(document).ready()
+$(window).load(function() {
+  $('.flexslider').flexslider({
+	animation: "slide",
+	controlNav: "thumbnails"
+  });
+});
+</script>
+{% endblock head %}
+
+
+{% block content %}
+	<!--start-breadcrumbs-->
+	<div class="breadcrumbs">
+		<div class="container">
+			<div class="breadcrumbs-main">
+				<ol class="breadcrumb">
+					<li><a href="{% url 'index' %}">Главная</a></li>
+					<li class="active">{{product.product_name}}</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+	<!--end-breadcrumbs-->
+	<!--start-single-->
+	<div class="single contact">
+		<div class="container">
+			<div class="single-main">
+				<div class="col-md-9 single-main-left">
+				<div class="sngl-top">
+					<div class="col-md-5 single-top-left">	
+						<div class="flexslider">
+							  <ul class="slides">
+							  	{% for image in images %}
+								<li data-thumb="{{ MEDIA_URL }}{{ image.card_image.url }}">
+									<div class="thumb-image"> <img src="{{ MEDIA_URL }}{{ image.card_image.url }}" data-imagezoom="true" class="img-responsive" alt=""/> </div>
+								</li>
+								{% endfor %}
+							  </ul>
+						</div>
+						<!-- FlexSlider -->
+					</div>	
+					<div class="col-md-7 single-top-right">
+						<div class="single-para simpleCart_shelfItem">
+						<h2>{{product.product_name}}</h2>
+							<div class="star-on">
+								<ul class="star-footer">
+										<li><a href="#"><i> </i></a></li>
+										<li><a href="#"><i> </i></a></li>
+										<li><a href="#"><i> </i></a></li>
+										<li><a href="#"><i> </i></a></li>
+										<li><a href="#"><i> </i></a></li>
+									</ul>
+								<div class="review">
+									<a href="#"> 1 customer review </a>
+									
+								</div>
+							<div class="clearfix"> </div>
+							</div>
+							<h5 class="item_price">{{product.product_price}}</h5>
+							<p>{{product.product_description}}</p>
+							<div class="clearfix"> </div>
+								<a href="{% url 'add_to_cart' id=product.id %}" class="add-cart item_add">Добавить в корзину</a>
+						</div>
+					</div>
+					<div class="clearfix"> </div>
+				</div>
+				<div class="tabs">
+					<ul class="menu_drop">
+				<li class="item1"><a href="#"><img src="{% static 'images/arrow.png' %}" alt="">Полное описание товара</a>
+					<ul>
+						<li class="subitem1"><a href="#">{{product.product_full_description}}</a></li>
+					</ul>
+				</li>
+				<li class="item2"><a href="#"><img src="{% static 'images/arrow.png' %}" alt="">Дополнительная информция</a>
+					<ul>
+					    <li class="subitem2"><a href="#"></a>{{product.product_addition_inf}}</li>
+					</ul>
+				</li>
+				<li class="item4"><a href="#"><img src="{% static 'images/arrow.png' %}" alt="">Помощь</a>
+					<ul>
+					    <li class="subitem2"><a href="#">{{product.product_full_description}}</a></li>
+					</ul>
+				</li>
+				<li class="item5"><a href="#"><img src="{% static 'images/arrow.png' %}" alt="">Еще как то раздел</a>
+					<ul>
+						<li class="subitem1"><a href="#">{{product.product_full_description}}</a></li>
+					</ul>
+				</li>
+	 		</ul>
+				</div>
+				<div class="clearfix"></div>
+				<h2 align="center"> Недавно просмотренные товары:</h2>
+				<div class="latestproducts">
+					<div class="product-one">
+					{% for product in exists_products  %}
+					<div class="col-md-3 product-left">
+						<div class="product-main simpleCart_shelfItem">
+							<a href="{% url 'product_card' id=product.id %}" class="mask"><img class="img-responsive zoom-img" src="{{ MEDIA_URL }}{{ product.product_image.url }}" alt="" /></a>
+							<div class="product-bottom">
+								<h3>{{product.product_name}}</h3>
+								<p>{{product.product_description | truncatechars_html:70}}</p>
+								<h4><a class="item_add" href="#"><i></i></a> <span class=" item_price">{{product.product_price}}</span></h4>
+							</div>
+							<div class="srch">
+								<span>{{product.product_discount}}</span>
+							</div>
+						</div>
+					</div>
+					{% endfor%}
+					<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+				
+				<div class="clearfix"> </div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+
+ {% endblock content %}

@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load staticfiles%}
+
+	{% block content %}
+
+	<!--banner-starts-->
+	<div class="bnr" id="home">
+		<div  id="top" class="callbacks_container">
+			<ul class="rslides" id="slider4">
+			{% for slider_item in slider_images  %}
+			    <li>
+					<img src="{{ MEDIA_URL }}{{ slider_item.slider_image.url }}" alt=""/> 
+				</li>
+			{% endfor%}	
+		</ul>
+	</div>
+		<div class="clearfix"> </div>
+	</div>
+	<!--banner-ends--> 
+	<!--Slider-Starts-Here-->
+				<script src="{% static 'js/responsiveslides.min.js' %}"></script>
+			 <script>
+			    // You can also use "$(window).load(function() {"
+			    $(function () {
+			      // Slideshow 4
+			      $("#slider4").responsiveSlides({
+			        auto: true,
+			        pager: true,
+			        nav: true,
+			        speed: 500,
+			        namespace: "callbacks",
+			        before: function () {
+			          $('.events').append("<li>before event fired.</li>");
+			        },
+			        after: function () {
+			          $('.events').append("<li>after event fired.</li>");
+			        }
+			      });
+			
+			    });
+			  </script>
+			<!--End-slider-script-->
+			<br>
+			<br>
+			<h1 align="center">Самые популярные:</h1>
+	<!--about-starts-->
+	<div class="about"> 
+		<div class="container">
+			<div class="about-top grid-1">
+				{% for product in best_products  %}
+				<div class="col-md-4 about-left">
+					<figure class="effect-bubba">
+						<img class="img-responsive" src="{{ MEDIA_URL }}{{ product.product_image.url }}" alt=""/>
+						<figcaption>
+							<h2>{{product.product_name}}</h2>
+							<p>{{product.product_description}}</p>	
+						</figcaption>			
+					</figure>
+				</div>
+				{% endfor%}
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>
+	<!--about-end-->
+	<!--product-starts-->
+	<div class="product"> 
+		<div class="container">
+			<div class="product-top">
+				<div class="product-one">
+					{% for product in exists_products  %}
+					<div class="col-md-3 product-left">
+						<div class="product-main simpleCart_shelfItem">
+							<a href="{% url 'product_card' id=product.id %}" class="mask"><img class="img-responsive zoom-img" src="{{ MEDIA_URL }}{{ product.product_image.url }}" alt="" /></a>
+							<div class="product-bottom">
+								<h3>{{product.product_name}}</h3>
+								<p>{{product.product_description| truncatechars_html:70}}</p>
+								<h4><a class="item_add" href="{% url 'add_to_cart' id=product.id %}"><i></i></a> <span class=" item_price">{{product.product_price}}</span></h4>
+							</div>
+							<div class="srch">
+								<span>{{product.product_discount}}</span>
+							</div>
+						</div>
+					</div>
+					{% endfor%}
+					<div class="clearfix"></div>
+				</div>					
+			</div>
+		</div>
+	</div>
+	<!--product-end-->
+	{% endblock content %}
