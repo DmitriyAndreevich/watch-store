@@ -24,7 +24,7 @@
 						</div>
 					</div>
 					<div class="col-md-9 contact-right">
-						<form action = "{% url 'contact' %}"" method ="POST">
+						<form action = "{% url 'contact' %}" method ="POST">
 							{%csrf_token%}
 							<input type="text" id="id_your_name" name="your_name"  placeholder="Ваше имя">
 							<input type="text" id="id_your_phone" name="your_phone" placeholder="Номер телефона">

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'shop',
+    "bootstrapform"
 ]
 
 MIDDLEWARE = [
@@ -49,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'myproject.urls'
@@ -118,7 +120,18 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
+_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
 
 MEDIA_URL = '/STATIC_ROOT/media/'
 STATIC_URL = '/STATIC_ROOT/'
-MEDIA_ROOT = 'C:/myproject/shop/static/media'
+MEDIA_ROOT = os.path.join(_PATH, 'shop', 'static', 'media')
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'nurixkg@gmail.com'
+DEFAULT_FROM_EMAIL = 'nurixkg@gmail.com'
+SERVER_EMAIL = 'nurixkg@gmail.com'
+EMAIL_HOST_PASSWORD = 'NurixMobile2017'

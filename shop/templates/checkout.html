@@ -1,42 +1,51 @@
 {% extends 'base.html' %}
-{% load staticfiles%}
+{% load staticfiles %}
 
-	{% block content %}
-	<!--start-ckeckout-->
-	<div class="ckeckout">
-		<div class="container">
-			<div class="ckeck-top heading">
-				<h2>CHECKOUT</h2>
-			</div>
-			<div class="ckeckout-top">
-			<div class="cart-items">
-			 <h3>Ваш список товаров:</h3>
-				
-			<div class="in-check" >
-				<ul class="unit">
-					<li><span>Товар</span></li>
-					<li><span>Название товара</span></li>		
-					<li><span>Цена за единицу</span></li>
-					<li><span>Подробности доставки</span></li>
-					<li> </li>
-					<div class="clearfix"> </div>
-				</ul>
-				{% for product in cart_products %}
-				<ul class="cart-header">
-					<a class="close1" href="{% url 'remove_from_cart' id=product.id %}"> </a>
-						<li class="ring-in" ><a href="{% url 'product_card' id=product.id %}" ><img src="{{ MEDIA_URL }}{{ product.product_image.url }}" class="img-responsive" alt=""></a>
-						</li>
-						<li><span class="name">{{product.product_name}}</span></li>
-						<li><span class="cost">{{product.product_price}}</span></li>
-						<li><span>Бесплатная доставка</span>
-						<p>Доставка в течении 2-3 рабочих дней</p></li>
-					<div class="clearfix"> </div>
-				</ul>
-				{%endfor%}
-			</div>
-			</div>  
-		 </div>
-		</div>
-	</div>
-	<!--end-ckeckout-->
-	{% endblock content %}
+
+{% block content %}
+    <!--start-ckeckout-->
+    <div class="ckeckout">
+        <div class="container">
+            <div class="ckeck-top heading">
+                <h2>CHECKOUT</h2>
+            </div>
+            {% if cart_products %}
+                <div class="ckeckout-top">
+                    <div class="cart-items">
+                        <h3>Ваш список товаров:</h3>
+
+                        <div class="in-check">
+                            <ul class="unit">
+                                <li><span>Товар</span></li>
+                                <li><span>Название товара</span></li>
+                                <li><span>Цена за единицу</span></li>
+                                <li><span>Подробности доставки</span></li>
+                                <li></li>
+                                <div class="clearfix"></div>
+                            </ul>
+                            {% for product in cart_products %}
+                                <ul class="cart-header">
+                                    <a class="close1" href="{% url 'remove_from_cart' id=product.id %}"> </a>
+                                    <li class="ring-in"><a href="{% url 'product_card' id=product.id %}"><img
+                                            src="{{ MEDIA_URL }}{{ product.product_image.url }}" class="img-responsive"
+                                            alt=""></a>
+                                    </li>
+                                    <li><span class="name">{{ product.product_name }}</span></li>
+                                    <li><span class="cost">{{ product.product_price }}</span></li>
+                                    <li><span>Бесплатная доставка</span>
+                                        <p>Доставка в течении 2-3 рабочих дней</p></li>
+                                    <div class="clearfix"></div>
+                                </ul>
+                            {% endfor %}
+                        </div>
+                        <a href="{% url 'order_detail' %}" class="btn btn-primary btn-lg pull-right">Оформить заказамана
+                        </a>
+                    </div>
+                </div>
+            {% else %}
+
+                <h2 align="center">У вас нет ни одной покупки</h2>
+            {% endif %}
+        </div>
+    </div>
+{% endblock content %}

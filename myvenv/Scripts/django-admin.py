@@ -1,4 +1,4 @@
-#!c:\myproject\myvenv\scripts\python.exe
+#!d:\django\watch-store\myvenv\scripts\python.exe
 from django.core import management
 
 if __name__ == "__main__":

@@ -55,7 +55,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<span class="simpleCart_total">${{cart_total_price}}</span></div>
 								<img src="{% static 'images/cart-1.png '%}" alt="" />
 						</a>
-						<p><a href="{% url 'remove_cart' %}" class="simpleCart_empty">Очистить корзину</a></p>
+						<p>
+                            {%  if cart_products %}
+                            <a href="{% url 'remove_cart' %}" class="simpleCart_empty">Очистить корзину</a>
+                            {% endif %}
+                        </p>
 						<div class="clearfix"> </div>
 					</div>
 				</div>
@@ -76,51 +80,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="top-nav">
 					<ul class="memenu skyblue"><li class="active"><a href="/">Главная</a></li>
 						{% for category in categories  %}
-						<li class="grid"><a href="#">{{category.category_name}}</a>
-							<div class="mepanel">
-								<div class="row">
-									<div class="col1 me-one">
-										<h4>Наш магазин</h4>
-										<ul>
-											<li><a href="products.html">Новое поступление</a></li>
-											<li><a href="products.html">Свитеры</a></li>
-											<li><a href="products.html">Swem Wear</a></li>
-											<li><a href="products.html">Аксессары</a></li>
-											<li><a href="products.html">Handbags</a></li>
-											<li><a href="products.html">Футболки</a></li>
-											<li><a href="products.html">Часы</a></li>
-											<li><a href="products.html">My Shopping Bag</a></li>
-										</ul>
-									</div>
-									<div class="col1 me-one">
-										<h4>Зона стиля</h4>
-										<ul>
-											<li><a href="products.html">Обувь</a></li>
-											<li><a href="products.html">Часы</a></li>
-											<li><a href="products.html">Бренды</a></li>
-											<li><a href="products.html">Плащи</a></li>
-											<li><a href="products.html">Аксессуары</a></li>
-											<li><a href="products.html">Ремни</a></li>
-										</ul>	
-									</div>
-									<div class="col1 me-one">
-										<h4>Популярные бренды</h4>
-										<ul>
-											<li><a href="products.html">499 Store</a></li>
-											<li><a href="products.html">Fastrack</a></li>
-											<li><a href="products.html">Casio</a></li>
-											<li><a href="products.html">Fossil</a></li>
-											<li><a href="products.html">Maxima</a></li>
-											<li><a href="products.html">Timex</a></li>
-											<li><a href="products.html">TomTom</a></li>
-											<li><a href="products.html">Titan</a></li>
-										</ul>		
-									</div>
-								</div>
-							</div>
+						<li class="grid">
+                            <a href="{% url 'watches'  id=category.id %}">{{category.category_name}}</a>
 						</li>
 						{% endfor%}
-						<li class="grid"><a href="typo.html">Наш блог</a>
 						</li>
 						<li class="grid"><a href="{% url 'contact' %}">Контакты</a>
 						</li>

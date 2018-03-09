@@ -1,5 +1,5 @@
 @echo off
-set "VIRTUAL_ENV=C:\myproject\myvenv"
+set "VIRTUAL_ENV=D:\django\watch-store\myvenv"
 
 if not defined PROMPT (
     set "PROMPT=$P$G"
