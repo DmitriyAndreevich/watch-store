@@ -18,4 +18,4 @@ class ContactForm(forms.ModelForm):
 class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
-        fields = ('customer_name', 'customer_email', 'customer_phone', 'comments',)
+        fields = ('customer_name', 'customer_email', 'customer_phone', 'comments', 'customer_adress',)

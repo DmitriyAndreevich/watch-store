@@ -66,6 +66,7 @@ class Status(models.Model):
 class Order(models.Model):
     customer_name = models.CharField(max_length=128, blank=True, null=True, default=None)
     customer_email = models.EmailField(blank=True, null=True, default=None)
+    customer_adress = models.CharField(max_length=128, blank=True, null=True, default=None)
     status = models.ForeignKey(Status, blank=True, null=True, default=None)
     product = models.ManyToManyField(Product, blank=True, null=True, default=None)
     customer_phone = models.CharField(max_length=48, blank=True, null=True, default=None)
