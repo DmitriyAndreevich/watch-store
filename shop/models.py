@@ -16,7 +16,6 @@ class Currency(models.Model):
 
 class Category(models.Model):
     category_name = models.CharField(max_length=128, blank=True, default=None)
-    product_image = models.ImageField(null=True, upload_to='products_images/')
 
     def __str__(self):
         return " %s" % self.category_name
