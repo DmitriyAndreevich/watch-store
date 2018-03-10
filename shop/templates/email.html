@@ -1,23 +1,25 @@
 <h2> Новый заказ:</h2>
 <br>
-<b>Ф.И.О клиента:</b> {{ result.customer_name  }}
+<b>Ф.И.О клиента:</b> {{ order1.customer_name  }}
 <br>
 <br>
-<b>E-mail:</b> {{ result.customer_email  }}
+<b>E-mail:</b> {{ order1.customer_email  }}
 <br>
 <br>
-<b>Номер телефона:</b>  {{ result.customer_phone  }}
+<b>Номер телефона:</b>  {{ order1.customer_phone  }}
 <br>
 <br>
-<b>Адрес доставки:</b>  {{ result.customer_adress  }}
+<b>Адрес доставки:</b>  {{ order1.customer_adress  }}
 <br>
 <br>
-<b>Сообщение:</b> {{ result.customer_message  }}
+<b>Сообщение:</b> {{ order1.customer_message  }}
 <br>
 <br>
-<b>Наименование товара(ов):</b> {{ cart_products }}
+{% for product in cart_products %}
+    <br>
+    <br>
+<b>Наименование товара(ов):</b><span class="name">{{ product.product_name }}</span>
+{% endfor %}
 <br>
 <br>
 <b>Общая стоимость товара(ов):</b> {{ cart_total_price }}
-
-
