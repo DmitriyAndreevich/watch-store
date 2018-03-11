@@ -13,5 +13,6 @@ urlpatterns = [
     url(r'^remove_cart/$', views.remove_cart, name='remove_cart'),
     url(r'^order_detail/$', views.order_detail, name='order_detail'),
     url(r'^watches/(?P<id>\d+)/$', views.watches, name='watches'),
+    url(r'^hits/(?P<id>\d+)/$', views.hits, name='hits'),
 
 ]

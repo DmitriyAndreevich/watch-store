@@ -47,14 +47,17 @@
 	<div class="about"> 
 		<div class="container">
 			<div class="about-top grid-1">
-				{% for product in best_products  %}
+				{% for category in categories  %}
 				<div class="col-md-4 about-left">
 					<figure class="effect-bubba">
-						<img class="img-responsive" src="{{ MEDIA_URL }}{{ product.product_image.url }}" alt=""/>
+                        <a href="{% url 'hits' id=category.id %}">
+						    <img  class="img-responsive" src="{{ MEDIA_URL }}{{ category.category_image.url}}"/>
+
 						<figcaption>
-							<h2>{{product.product_name}}</h2>
-							<p>{{product.product_description}}</p>	
-						</figcaption>			
+							<h2>{{category.category_name}}</h2>
+							<p>Хиты продаж 2017</p>
+						</figcaption>
+                            </a>
 					</figure>
 				</div>
 				{% endfor%}
@@ -71,14 +74,17 @@
 					{% for product in exists_products  %}
 					<div class="col-md-3 product-left">
 						<div class="product-main simpleCart_shelfItem">
-							<a href="{% url 'product_card' id=product.id %}" class="mask"><img class="img-responsive zoom-img" src="{{ MEDIA_URL }}{{ product.product_image.url }}" alt="" /></a>
+							<a href="{% url 'product_card' id=product.id %}" class="mask">
+                                <img class="img-responsive zoom-img" src="{{ MEDIA_URL }}{{ product.product_image.url }}" alt="" /></a>
 							<div class="product-bottom">
 								<h3>{{product.product_name}}</h3>
 								<p>{{product.product_description| truncatechars_html:70}}</p>
 								<h4><a class="item_add" href="{% url 'add_to_cart' id=product.id %}"><i></i></a> <span class=" item_price">{{product.product_price}}</span></h4>
 							</div>
 							<div class="srch">
-								<span>{{product.product_discount}}</span>
+                                 {% if product.discount_product %}
+								<span>-{{product.discount_product}}%</span>
+                                 {% endif %}
 							</div>
 						</div>
 					</div>

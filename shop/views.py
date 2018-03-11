@@ -161,3 +161,20 @@ def watches(request, id):
         cart_total_price = cart_total_price + product.product_price
 
     return render(request, 'watches.html', locals())
+
+
+def hits(request, id):
+    currencies = Currency.objects.all()
+    categories = Category.objects.all()
+    exists_products = Product.objects.filter(categories=id, is_bestseller=True)
+    categories = Category.objects.all()
+    slider_images = SliderImage.objects.all()
+    card_image = ProductCardImage.objects.all()
+    if 'cart' not in request.session:
+        request.session['cart'] = list()
+    cart_products = Product.objects.filter(id__in=request.session['cart'])
+    cart_total_price = 0
+    for product in cart_products:
+        cart_total_price = cart_total_price + product.product_price
+
+    return render(request, 'hits.html', locals())
